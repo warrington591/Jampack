@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.services)
     alias(libs.plugins.compose.compiler)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -109,9 +111,18 @@ dependencies {
     // Coil for image loading in Compose
     implementation("io.coil-kt:coil-compose:2.3.0")
 
+    // Hilt dependencies
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
+
     // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.7")
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 apply(plugin = "com.google.gms.google-services")
+apply(plugin = "dagger.hilt.android.plugin")
